@@ -22,6 +22,8 @@ import org.joda.time.field.FieldUtils;
 import org.joda.time.format.ISOPeriodFormat;
 import org.joda.time.format.PeriodFormatter;
 
+import java.util.HashMap;
+
 /**
  * An immutable time period representing a number of days.
  * <p>
@@ -77,30 +79,27 @@ public final class Days extends BaseSingleFieldPeriod {
      * @return the instance of Days
      */
     public static Days days(int days) {
-        switch (days) {
-            case 0:
-                return ZERO;
-            case 1:
-                return ONE;
-            case 2:
-                return TWO;
-            case 3:
-                return THREE;
-            case 4:
-                return FOUR;
-            case 5:
-                return FIVE;
-            case 6:
-                return SIX;
-            case 7:
-                return SEVEN;
-            case Integer.MAX_VALUE:
-                return MAX_VALUE;
-            case Integer.MIN_VALUE:
-                return MIN_VALUE;
-            default:
-                return new Days(days);
+
+        HashMap cases = new HashMap<Integer, Days>();
+        cases.put(new Integer(0), ZERO);
+        cases.put(new Integer(1), ONE);
+        cases.put(new Integer(2), TWO);
+        cases.put(new Integer(3), THREE);
+        cases.put(new Integer(4), FOUR);
+        cases.put(new Integer(5), FIVE);
+        cases.put(new Integer(6), SIX);
+        cases.put(new Integer(7), SEVEN);
+        cases.put(new Integer(Integer.MAX_VALUE), MAX_VALUE);
+        cases.put(new Integer(Integer.MIN_VALUE), MIN_VALUE);
+
+        Object instance = cases.get(new Integer(days));
+
+        if (instance == null) {
+            return new Days(days);
         }
+
+        return (Days) instance;
+
     }
 
     //-----------------------------------------------------------------------
