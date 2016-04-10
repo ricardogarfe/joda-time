@@ -4,17 +4,17 @@ import java.util.HashMap;
 
 public class Pool {
 
-    private HashMap<Integer, Days> instances;
+    private HashMap<Integer, Object> instances;
 
     public Pool() {
-        this.instances = new HashMap<Integer, Days>();
+        this.instances = new HashMap<Integer, Object>();
     }
 
-    public void add(int numeral, Days day) {
+    public void add(int numeral, Object day) {
         instances.put(new Integer(numeral), day);
     }
 
-    public Days getInstance(int numeral) {
+    public Object getInstance(int numeral) {
 
         Object instance = instances.get(new Integer(numeral));
 
@@ -22,6 +22,6 @@ public class Pool {
             return null;
         }
 
-        return (Days) instance;
+        return instance;
     }
 }
