@@ -30,7 +30,7 @@ import org.joda.time.format.PeriodFormatter;
  * type-safe way of representing a number of minutes in an application.
  * <p>
  * The number of minutes is set in the constructor, and may be queried using
- * <code>getMinutes()</code>. Basic mathematical operations are provided -
+ * <code>retrieveMinutes()</code>. Basic mathematical operations are provided -
  * <code>plus()</code>, <code>minus()</code>, <code>multipliedBy()</code> and
  * <code>dividedBy()</code>.
  * <p>
@@ -69,22 +69,7 @@ public final class Minutes extends BaseSingleFieldPeriod {
      * @return the instance of Minutes
      */
     public static Minutes minutes(int minutes) {
-        switch (minutes) {
-            case 0:
-                return ZERO;
-            case 1:
-                return ONE;
-            case 2:
-                return TWO;
-            case 3:
-                return THREE;
-            case Integer.MAX_VALUE:
-                return MAX_VALUE;
-            case Integer.MIN_VALUE:
-                return MIN_VALUE;
-            default:
-                return new Minutes(minutes);
-        }
+        return Pool.retrieveMinutes(minutes);
     }
 
     //-----------------------------------------------------------------------
@@ -194,7 +179,7 @@ public final class Minutes extends BaseSingleFieldPeriod {
      *
      * @param minutes  the number of minutes to represent
      */
-    private Minutes(int minutes) {
+    protected Minutes(int minutes) {
         super(minutes);
     }
 

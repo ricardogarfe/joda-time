@@ -6,26 +6,30 @@ public class Pool {
 
     private static Pool myInstance;
 
-    private HashMap<Integer, Object> instances;
+    private HashMap<Integer, Days> days;
+    private HashMap<Integer, Minutes> minutes;
 
     private Pool() {
-        this.instances = new HashMap<Integer, Object>();
+        this.days = new HashMap<Integer, Days>();
+        this.minutes = new HashMap<Integer, Minutes>();
     }
 
-    public static Pool getInstance() {
+    public static Pool getDays() {
         if (myInstance == null) {
             myInstance = new Pool();
         }
         return myInstance;
     }
 
-    public void add(int numeral, Object day) {
-        instances.put(new Integer(numeral), day);
+    private void addDays(int numeral, Days day) {
+        days.put(new Integer(numeral), day);
+    }
+    private void addMinutes(int numeral, Minutes minute) {
+        minutes.put(new Integer(numeral), minute);
     }
 
-    public Object getInstance(int numeral) {
-
-        Object instance = instances.get(new Integer(numeral));
+    public Object getDays(int numeral) {
+        Object instance = days.get(new Integer(numeral));
 
         if (instance == null) {
             return null;
@@ -34,16 +38,40 @@ public class Pool {
         return instance;
     }
 
-    public static Days getDays(int numeral) {
-        Pool pool = Pool.getInstance();
+    public static Days retrieveDays(int numeral) {
+        Pool pool = Pool.getDays();
 
-        Object result = pool.getInstance(numeral);
+        Object result = pool.getDays(numeral);
 
         if (result == null) {
             result = new Days(numeral);
-            pool.add(numeral, result);
+            pool.addDays(numeral, (Days) result);
         }
 
         return (Days) result;
     }
+
+    public static Minutes retrieveMinutes(int numeral) {
+        Pool pool = Pool.getDays();
+
+        Object result = pool.getMinutes(numeral);
+
+        if (result == null) {
+            result = new Minutes(numeral);
+            pool.addMinutes(numeral, (Minutes) result);
+        }
+
+        return (Minutes) result;
+    }
+
+    public Object getMinutes(int numeral) {
+        Object instance = minutes.get(new Integer(numeral));
+
+        if (instance == null) {
+            return null;
+        }
+
+        return instance;
+    }
+
 }
