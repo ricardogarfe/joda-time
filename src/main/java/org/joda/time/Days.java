@@ -468,26 +468,26 @@ public final class Days extends BaseSingleFieldPeriod {
         return "P" + String.valueOf(getValue()) + "D";
     }
 
-    private static class MyPool extends Pool {
+    private static class MyPool {
 
         public MyPool() {
-            super();
-            this.add(0, ZERO);
-            this.add(1, ONE);
-            this.add(2, TWO);
-            this.add(3, THREE);
-            this.add(4, FOUR);
-            this.add(5, FIVE);
-            this.add(6, SIX);
-            this.add(7, SEVEN);
-            this.add(Integer.MAX_VALUE, MAX_VALUE);
-            this.add(Integer.MIN_VALUE, MIN_VALUE);
+            Pool pool = Pool.getInstance();
+            pool.add(0, ZERO);
+            pool.add(1, ONE);
+            pool.add(2, TWO);
+            pool.add(3, THREE);
+            pool.add(4, FOUR);
+            pool.add(5, FIVE);
+            pool.add(6, SIX);
+            pool.add(7, SEVEN);
+            pool.add(Integer.MAX_VALUE, MAX_VALUE);
+            pool.add(Integer.MIN_VALUE, MIN_VALUE);
         }
 
-        @Override
         public Days getInstance(int days) {
 
-            Object result = super.getInstance(days);
+            Pool pool = Pool.getInstance();
+            Object result = pool.getInstance(days);
 
             if (result == null) {
                 return new Days(days);
