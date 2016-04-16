@@ -42,7 +42,7 @@ import org.joda.time.format.PeriodFormatter;
 public final class Days extends BaseSingleFieldPeriod {
 
     /** Constant representing zero days. */
-    public static final Days ZERO = new MyPool().retrieve(0);
+    public static final Days ZERO = MyPool.retrieve(0);
     /** Constant representing one day. */
     public static final Days ONE = new Days(1);
     /** Constant representing two days. */
@@ -80,7 +80,7 @@ public final class Days extends BaseSingleFieldPeriod {
 
         MyPool cases = new MyPool();
 
-        return cases.retrieve(days);
+        return MyPool.retrieve(days);
     }
 
     //-----------------------------------------------------------------------
@@ -468,32 +468,4 @@ public final class Days extends BaseSingleFieldPeriod {
         return "P" + String.valueOf(getValue()) + "D";
     }
 
-    private static class MyPool {
-
-        public MyPool() {
-            Pool pool = Pool.getInstance();
-            pool.add(0, ZERO);
-            pool.add(1, ONE);
-            pool.add(2, TWO);
-            pool.add(3, THREE);
-            pool.add(4, FOUR);
-            pool.add(5, FIVE);
-            pool.add(6, SIX);
-            pool.add(7, SEVEN);
-            pool.add(Integer.MAX_VALUE, MAX_VALUE);
-            pool.add(Integer.MIN_VALUE, MIN_VALUE);
-        }
-
-        public Days retrieve(int days) {
-
-            Pool pool = Pool.getInstance();
-            Object result = pool.getInstance(days);
-
-            if (result == null) {
-                return new Days(days);
-            }
-
-            return (Days) result;
-        }
-    }
 }
