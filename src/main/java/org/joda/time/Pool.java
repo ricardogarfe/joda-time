@@ -33,4 +33,17 @@ public class Pool {
 
         return instance;
     }
+
+    public static Days getDays(int numeral) {
+        Pool pool = Pool.getInstance();
+
+        Object result = pool.getInstance(numeral);
+
+        if (result == null) {
+            result = new Days(numeral);
+            pool.add(numeral, result);
+        }
+
+        return (Days) result;
+    }
 }

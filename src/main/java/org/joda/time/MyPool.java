@@ -1,7 +1,6 @@
 package org.joda.time;
 
 class MyPool {
-
     public MyPool() {
         Pool pool = Pool.getInstance();
         pool.add(0, Days.ZERO);
@@ -17,14 +16,6 @@ class MyPool {
     }
 
     public static Days retrieve(int days) {
-
-        Pool pool = Pool.getInstance();
-        Object result = pool.getInstance(days);
-
-        if (result == null) {
-            return new Days(days);
-        }
-
-        return (Days) result;
+        return Pool.getDays(days);
     }
 }
