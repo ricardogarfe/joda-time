@@ -42,7 +42,7 @@ import org.joda.time.format.PeriodFormatter;
 public final class Days extends BaseSingleFieldPeriod {
 
     /** Constant representing zero days. */
-    public static final Days ZERO = new Days(0);
+    public static final Days ZERO = new MyPool().getInstance(0);
     /** Constant representing one day. */
     public static final Days ONE = new Days(1);
     /** Constant representing two days. */
