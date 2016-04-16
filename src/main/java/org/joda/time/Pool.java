@@ -51,14 +51,14 @@ public class Pool {
         return (Days) result;
     }
 
-    public static Minutes retrieveMinutes(int minutes) {
+    public static Minutes retrieveMinutes(int numeral) {
         Pool pool = Pool.getDays();
 
-        Object result = pool.getMinutes(minutes);
+        Object result = pool.getMinutes(numeral);
 
         if (result == null) {
-            result = new Minutes(minutes);
-            pool.addMinutes(minutes, (Minutes) result);
+            result = new Minutes(numeral);
+            pool.addMinutes(numeral, (Minutes) result);
         }
 
         return (Minutes) result;
