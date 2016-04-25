@@ -34,6 +34,10 @@ public class Limits implements Serializable {
         return lower == DateTimeFieldType.dayOfYear() && upper == null;
     }
 
+    public boolean limitedByDay() {
+        return lower == null && upper == DateTimeFieldType.dayOfYear();
+    }
+
     private long userUpper(Chronology chrono, long millis) {
         if (upper == null) return millis;
 
