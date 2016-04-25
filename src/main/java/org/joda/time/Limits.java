@@ -11,4 +11,31 @@ public class Limits implements Serializable {
         lower = lowerLimit;
         upper = upperLimit;
     }
+
+    public DateTimeFieldType lower() {
+        return lower;
+    }
+
+    public DateTimeFieldType upper() {
+        return upper;
+    }
+
+    public long applyLimits(Chronology chrono, long millis) {
+        millis = useLower(chrono, millis);
+        millis = userUpper(chrono, millis);
+        return millis;
+    }
+
+    private long userUpper(Chronology chrono, long millis) {
+        if (upper == null) return millis;
+
+        return upper.getField(chrono).remainder(millis);
+    }
+
+    private long useLower(Chronology chrono, long millis) {
+        if (lower == null) return millis;
+
+        return lower.getField(chrono).roundFloor(millis);
+    }
+
 }
