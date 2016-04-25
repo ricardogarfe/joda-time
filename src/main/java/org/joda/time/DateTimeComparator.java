@@ -63,6 +63,13 @@ public class DateTimeComparator implements Comparator<Object>, Serializable {
     private final DateTimeFieldType iUpperLimit;
     private final Limits iLimits;
 
+    protected DateTimeComparator(Limits limits) {
+        super();
+        iLowerLimit = limits.lower();
+        iUpperLimit = limits.upper();
+        iLimits = limits;
+    }
+
     //-----------------------------------------------------------------------
     /**
      * Returns a DateTimeComparator the compares the entire date time value.
@@ -115,7 +122,7 @@ public class DateTimeComparator implements Comparator<Object>, Serializable {
         if (limits.limitedByDay()) {
             return TIME_INSTANCE;
         }
-        return new DateTimeComparator(lowerLimit, upperLimit);
+        return new DateTimeComparator(limits);
     }
 
     /**
