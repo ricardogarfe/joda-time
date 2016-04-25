@@ -199,11 +199,8 @@ public class DateTimeComparator implements Comparator<Object>, Serializable {
         Chronology rhsChrono = conv.getChronology(rhsObj, (Chronology) null);
         long rhsMillis = conv.getInstantMillis(rhsObj, rhsChrono);
 
-        lhsMillis = useLower(lhsChrono, lhsMillis);
-        rhsMillis = useLower(rhsChrono, rhsMillis);
-
-        rhsMillis = userUpper(rhsChrono, rhsMillis);
-        lhsMillis = userUpper(lhsChrono, lhsMillis);
+        rhsMillis = applyLimits(rhsChrono, rhsMillis);
+        lhsMillis = applyLimits(lhsChrono, lhsMillis);
 
         if (lhsMillis < rhsMillis) {
             return -1;
@@ -212,6 +209,12 @@ public class DateTimeComparator implements Comparator<Object>, Serializable {
         } else {
             return 0;
         }
+    }
+
+    private long applyLimits(Chronology rhsChrono, long rhsMillis) {
+        rhsMillis = useLower(rhsChrono, rhsMillis);
+        rhsMillis = userUpper(rhsChrono, rhsMillis);
+        return rhsMillis;
     }
 
     private long userUpper(Chronology chrono, long millis) {
