@@ -202,10 +202,8 @@ public class DateTimeComparator implements Comparator<Object>, Serializable {
         lhsMillis = useLower(lhsChrono, lhsMillis);
         rhsMillis = useLower(rhsChrono, rhsMillis);
 
-        if (iUpperLimit != null) {
-            lhsMillis = iUpperLimit.getField(lhsChrono).remainder(lhsMillis);
-            rhsMillis = iUpperLimit.getField(rhsChrono).remainder(rhsMillis);
-        }
+        rhsMillis = userUpper(rhsChrono, rhsMillis);
+        lhsMillis = userUpper(lhsChrono, lhsMillis);
 
         if (lhsMillis < rhsMillis) {
             return -1;
@@ -214,6 +212,13 @@ public class DateTimeComparator implements Comparator<Object>, Serializable {
         } else {
             return 0;
         }
+    }
+
+    private long userUpper(Chronology chrono, long millis) {
+        if (iUpperLimit != null) {
+            millis = iUpperLimit.getField(chrono).remainder(millis);
+        }
+        return millis;
     }
 
     private long useLower(Chronology chrono, long millis) {
