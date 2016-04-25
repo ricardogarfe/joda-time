@@ -26,6 +26,10 @@ public class Limits implements Serializable {
         return millis;
     }
 
+    public boolean noLimits() {
+        return lower == null && upper == null;
+    }
+
     private long userUpper(Chronology chrono, long millis) {
         if (upper == null) return millis;
 

@@ -104,10 +104,12 @@ public class DateTimeComparator implements Comparator<Object>, Serializable {
      * @return a comparator over all fields between the limits
      */
     public static DateTimeComparator getInstance(DateTimeFieldType lowerLimit, DateTimeFieldType upperLimit) {
-        if (lowerLimit == null && upperLimit == null) {
+        Limits limits = new Limits(lowerLimit, upperLimit);
+
+        if (limits.noLimits()) {
             return ALL_INSTANCE;
         }
-        if (lowerLimit == DateTimeFieldType.dayOfYear() && upperLimit == null) {
+        if (limits.lower() == DateTimeFieldType.dayOfYear() && limits.upper() == null) {
             return DATE_INSTANCE;
         }
         if (lowerLimit == null && upperLimit == DateTimeFieldType.dayOfYear()) {
@@ -218,7 +220,7 @@ public class DateTimeComparator implements Comparator<Object>, Serializable {
      * @return the resolved singleton instance
      */
     private Object readResolve() {
-        return getInstance(iLowerLimit, iUpperLimit);
+        return getInstance(iLimits.lower(), iLimits.upper());
     }
 
     /**
