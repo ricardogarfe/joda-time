@@ -15,11 +15,11 @@
  */
 package org.joda.time;
 
-import java.io.Serializable;
-import java.util.Comparator;
-
 import org.joda.time.convert.ConverterManager;
 import org.joda.time.convert.InstantConverter;
+
+import java.io.Serializable;
+import java.util.Comparator;
 
 /**
  * DateTimeComparator provides comparators to compare one date with another.
@@ -215,17 +215,15 @@ public class DateTimeComparator implements Comparator<Object>, Serializable {
     }
 
     private long userUpper(Chronology chrono, long millis) {
-        if (iUpperLimit != null) {
-            millis = iUpperLimit.getField(chrono).remainder(millis);
-        }
-        return millis;
+        if (iUpperLimit == null) return millis;
+
+        return iUpperLimit.getField(chrono).remainder(millis);
     }
 
     private long useLower(Chronology chrono, long millis) {
-        if (iLowerLimit != null) {
-            millis = iLowerLimit.getField(chrono).roundFloor(millis);
-        }
-        return millis;
+        if (iLowerLimit == null) return millis;
+
+        return iLowerLimit.getField(chrono).roundFloor(millis);
     }
 
     //-----------------------------------------------------------------------
