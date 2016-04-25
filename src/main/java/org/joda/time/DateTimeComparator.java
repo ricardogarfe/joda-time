@@ -61,6 +61,7 @@ public class DateTimeComparator implements Comparator<Object>, Serializable {
     private final DateTimeFieldType iLowerLimit;
     /** The upper limit of fields to compare, null if no limit */
     private final DateTimeFieldType iUpperLimit;
+    private final Limits iLimits;
 
     //-----------------------------------------------------------------------
     /**
@@ -155,6 +156,7 @@ public class DateTimeComparator implements Comparator<Object>, Serializable {
         super();
         iLowerLimit = lowerLimit;
         iUpperLimit = upperLimit;
+        iLimits = new Limits(lowerLimit, upperLimit);
     }
 
     //-----------------------------------------------------------------------
