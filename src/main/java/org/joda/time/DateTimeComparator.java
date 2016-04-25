@@ -109,7 +109,7 @@ public class DateTimeComparator implements Comparator<Object>, Serializable {
         if (limits.noLimits()) {
             return ALL_INSTANCE;
         }
-        if (limits.lower() == DateTimeFieldType.dayOfYear() && limits.upper() == null) {
+        if (limits.limitedByDate()) {
             return DATE_INSTANCE;
         }
         if (lowerLimit == null && upperLimit == DateTimeFieldType.dayOfYear()) {
