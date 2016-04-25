@@ -199,8 +199,8 @@ public class DateTimeComparator implements Comparator<Object>, Serializable {
         Chronology rhsChrono = conv.getChronology(rhsObj, (Chronology) null);
         long rhsMillis = conv.getInstantMillis(rhsObj, rhsChrono);
 
-        rhsMillis = iLimits.applyLimits(rhsChrono, rhsMillis);
-        lhsMillis = iLimits.applyLimits(lhsChrono, lhsMillis);
+        rhsMillis = iLimits.apply(rhsChrono, rhsMillis);
+        lhsMillis = iLimits.apply(lhsChrono, lhsMillis);
 
         if (lhsMillis < rhsMillis) {
             return -1;

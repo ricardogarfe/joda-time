@@ -20,7 +20,7 @@ public class Limits implements Serializable {
         return upper;
     }
 
-    public long applyLimits(Chronology chrono, long millis) {
+    public long apply(Chronology chrono, long millis) {
         millis = useLower(chrono, millis);
         millis = userUpper(chrono, millis);
         return millis;
