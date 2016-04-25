@@ -8,7 +8,7 @@ public class Limits implements Serializable {
     private final DateTimeFieldType upper;
 
     public Limits(DateTimeFieldType lowerLimit, DateTimeFieldType upperLimit) {
-        this.lower = lowerLimit;
-        this.upper = upperLimit;
+        lower = lowerLimit;
+        upper = upperLimit;
     }
 }
