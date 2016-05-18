@@ -50,4 +50,22 @@ public class Limits implements Serializable {
         return lower.getField(chrono).roundFloor(millis);
     }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Limits limits = (Limits) o;
+
+    if (lower != null ? !lower.equals(limits.lower) : limits.lower != null) return false;
+    return upper != null ? upper.equals(limits.upper) : limits.upper == null;
+
+  }
+
+  @Override
+  public int hashCode() {
+    int result = lower != null ? lower.hashCode() : 0;
+    result = 31 * result + (upper != null ? upper.hashCode() : 0);
+    return result;
+  }
 }

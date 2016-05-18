@@ -239,22 +239,22 @@ public class DateTimeComparator implements Comparator<Object>, Serializable {
     public boolean equals(Object object) {
         if (object instanceof DateTimeComparator) {
             DateTimeComparator other = (DateTimeComparator) object;
-            return (iLowerLimit == other.getLowerLimit() ||
-                    (iLowerLimit != null && iLowerLimit.equals(other.getLowerLimit()))) &&
-                   (iUpperLimit == other.getUpperLimit() ||
-                    (iUpperLimit != null && iUpperLimit.equals(other.getUpperLimit())));
+            return iLimits.equals(other.limits());
         }
         return false;
     }
 
-    /**
+  private Limits limits() {
+    return iLimits;
+  }
+
+  /**
      * Gets a suitable hashcode.
      * 
      * @return the hashcode
      */
     public int hashCode() {
-        return (iLowerLimit == null ? 0 : iLowerLimit.hashCode()) +
-               (123 * (iUpperLimit == null ? 0 : iUpperLimit.hashCode()));
+        return iLimits.hashCode();
     }
 
     /**
